@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure File Storage</title>
+    <style>
+        *{  
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+        body{
+            font-family:sans-serif;
+            padding:20px;
+        }
+        h1{
+            color:forestgreen;
+        }
+        .form-section{
+            margin-top:40px;
+        }
+        input[type="file"],input[type="text"]{
+            width:100%;
+            padding:8px;
+            margin-top:8px;
+            margin-bottom:12px;
+        }
+        button{
+            padding:10px 20px;
+            border:none;
+            color:white;
+            border-radius:6px;
+            cursor:pointer;
+        }
+        .btn-upload{
+            background-color:blue;
+        }
+        .btn-delete{
+            background-color:red;
+        }
+        .file-list{
+            margin-top:60px;
+        }
+        .file-item{
+            margin:10px 0;
+        }
+        img.preview{
+            max-width:200px;
+            display:block;
+            margin-top:5px;
+        }
+        ul{
+            padding:20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Secure File Storage</h1>
+    <div class="form-section">
+        <h2>Upload File</h2>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="uploadfile" required>
+            <button class="btn-upload" type="submit">Upload</button> 
+        </form>
+    </div>
+    <div class="form-section">
+        <h2>Delete  File</h2>
+        <form action="/delete" method="post">
+            <input type="text" placeholder="Enter exact filename to delete" name="deletefile" required>
+            <button class="btn-delete" type="submit">Delete</button>
+        </form>
+    </div>
+    <div class="file-list">
+        <h2>Uploaded Files<h2>
+        <%if(files.length===0){%>
+            <p>No files uploaded yet.</p>
+        <%}else{%>
+            <ul>
+                <%files.forEach(file=>{%>
+                    <li class="file-item">
+                        <strong><%=file%></strong>
+                        <a href="/images/uploads/<%=file%>" download>Download</a>
+                        <%if(file.match(/\.(jpg|jpeg|png|gif)$/i)){%>
+                            <img src="/images/uploads/<%=file%>" alt="<%=file%>" class="preview"/>
+                        <%}%>
+                    </li>
+                <%})%>
+            </ul>
+        <%}%>
+    </div>
+</body>
+</html>

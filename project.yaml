@@ -1,0 +1,5 @@
+Include libraries such as express, multer, ejs, cookie-parser, bcrypt, jsonwebtoken, mongoose
+
+Create a user schema
+
+Create storage page to upload files, delete files, check uploaded files
